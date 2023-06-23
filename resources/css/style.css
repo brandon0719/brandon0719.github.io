@@ -6,7 +6,7 @@
     color: white;
 }
 .banner {
-    background-image: url("/Users/brandonwong/Website/resources/images/pexels-stephan-seeber-1261728.jpg");
+    background-image: url("../images/pexels-stephan-seeber-1261728.jpg");
     background-size: cover;
     height: 100vh;
     width: 100%;
