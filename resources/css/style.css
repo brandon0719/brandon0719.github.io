@@ -1,0 +1,76 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Merriweather, serif;
+    box-sizing: border-box;
+    color: white;
+}
+.banner {
+    background-image: url("/Users/brandonwong/Website/resources/images/pexels-stephan-seeber-1261728.jpg");
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+header{
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    border-bottom: solid 1px #c6c1c1;
+    background-color: white;
+}
+nav {
+    display: flex;
+    align-items: center;
+    padding: 1.875rem;
+}
+#logo {
+    font-weight: 400;
+    flex: 1;
+    color: #4a4a4a;
+    font-size: 1.5rem;
+    font-family: Merriweather, serif;
+}
+nav ul li {
+    display: inline-block;
+    margin: 1rem 1rem; 
+}
+nav ul li a {
+    font-weight: 400;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+}
+.banner {
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+}
+.avatar {
+    display: block;
+    margin: 9rem auto 2rem auto;
+    border-radius: 50%;
+    width: 12rem;
+    height: auto;
+    border: solid 0.5px #4a4a4a;
+}
+h4 {
+    line-height: 19px;
+    font-size: 2rem;
+    font-weight: 600;
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.links ul{
+    text-align: center
+}
+.links ul li {
+    display: inline-flex;
+    padding: 0 2rem;
+}
+.links ul li a{
+    font-weight: 500;
+    text-decoration: none;
+}
