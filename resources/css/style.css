@@ -23,7 +23,7 @@ nav {
     align-items: center;
     padding: 1.875rem;
 }
-#logo {
+.logo {
     font-weight: 400;
     flex: 1;
     color: #4a4a4a;
