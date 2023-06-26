@@ -3,7 +3,19 @@
     margin: 0;
     font-family: Merriweather, serif;
     box-sizing: border-box;
-    color: white;
+    color: black;
+}
+body {
+    background-color: #efefea;
+}
+h1, h2, h3, h4 {
+    font-family: Merriweather, serif;
+}
+.flex-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 1;
 }
 .banner {
     background-image: url("../images/pexels-stephan-seeber-1261728.jpg");
@@ -13,20 +25,21 @@
 }
 header{
     position: fixed;
-    z-index: 100;
+    z-index: 1;
     width: 100%;
-    border-bottom: solid 1px #c6c1c1;
-    background-color: white;
+    height: 6rem;
+    border-bottom: solid 1px black;
+    background-color: #efefea;
 }
 nav {
     display: flex;
     align-items: center;
-    padding: 1.875rem;
+    padding: 1.5rem;
 }
 .logo {
     font-weight: 400;
     flex: 1;
-    color: #4a4a4a;
+    color: black;
     font-size: 1.5rem;
     font-family: Merriweather, serif;
 }
@@ -37,8 +50,11 @@ nav ul li {
 nav ul li a {
     font-weight: 400;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1rem;
     color: black;
+}
+nav ul li a:hover {
+    color:dimgrey;
 }
 .banner {
     position: relative;
@@ -53,24 +69,47 @@ nav ul li a {
     height: auto;
     border: solid 0.5px #4a4a4a;
 }
-h4 {
+#home h4 {
     line-height: 19px;
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 500;
     display: block;
     margin-block-start: 1.33em;
     margin-block-end: 1.33em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
+    color: white;
+    background-color:unset;
 }
 .links ul{
-    text-align: center
+    text-align: center;
 }
 .links ul li {
-    display: inline-flex;
+    display: inline-block;
     padding: 0 2rem;
 }
-.links ul li a{
+.links ul li a {
+    color: white;
     font-weight: 500;
     text-decoration: none;
+}
+.links ul li a:hover {
+    color:gainsboro;
+}
+#about-me {
+    border-bottom: 1px solid black;
+}
+#about-me #hello{
+    font-weight: 500;
+    color: black;
+    margin: 5rem 2rem;
+}
+#description {
+    font-weight: 500;
+    justify-content:left;
+    margin: 5rem 5rem;
+    line-height: 2;
+}
+#description h1{
+    font-weight: 400;
 }
