@@ -100,4 +100,9 @@
   .text-container {
     text-align: justify;
   }
+  .modal-content {
+    width: 90%;
+    height: 80%;
+    max-width: 400px;
+  }
 }
