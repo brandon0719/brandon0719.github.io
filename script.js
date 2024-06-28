@@ -3,6 +3,7 @@ function toggleMenu() {
     const icon = document.querySelector(".hamburger-icon");
     menu.classList.toggle("open");
     icon.classList.toggle("open");
+    console.log('Menu toggled');
 }
 
 // Socials links
@@ -13,6 +14,9 @@ document.getElementById('github-icon').addEventListener('click', function() {
     window.open('https://www.github.com/brandon0719', '_blank');
 });
 
+/**
+ * Resume modal functions
+ */
 // Resume Modal
 function openModal() {
     const pdfPath = './assets/Brandon_Wong_Resume_2024.pdf';
@@ -30,7 +34,10 @@ window.onclick = function(event) {
         closeModal();
     }
 }
-
+/**
+ * Resume render function
+ * @param {} url 
+ */
 // Function to render the PDF
 async function renderPDF(url) {
     const loadingTask = pdfjsLib.getDocument(url);
@@ -70,3 +77,19 @@ async function renderPDF(url) {
     await renderTask.promise;
     console.log('Page rendered');
 }
+
+/**
+ * Observer API
+ */
+const hiddens = document.querySelectorAll('.hidden');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        } else {
+            entry.target.classList.remove('visible');
+        }
+    });
+}); 
+hiddens.forEach((hidden) => observer.observe(hidden));
