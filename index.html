@@ -1,255 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brandon Wong</title>
-    <link rel="icon" href="./assets/favicon.png" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
-  </head>
-  <body>
-    <nav id="desktop-nav">
-      <div class="logo">Brandon Wong</div>
-      <div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <nav id="hamburger-nav">
-      <div class="logo">Brandon Wong</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-        </div>
-      </div>
-    </nav>
-
-    <section class="hidden" id="profile">
-      <div class="section__pic-container">
-        <img
-          src="./assets/profile-pic.png"
-          alt="Brandon Wong profile picture" />
-      </div>
-      <div class="section__text">
-        <p class="section__text__p1">Hello, I'm</p>
-        <h1 class="title">Brandon</h1>
-        <p class="section__text__p2">Student at Stony Brook University</p>
-        <div class="btn-container">
-          <button class="btn btn-color-2" onclick="openModal()">
-            Open Resume
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="socials-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="My LinkedIn profile"
-            class="icon"
-            id="linkedin-icon" />
-          <img
-            src="./assets/github.png"
-            alt="My GitHub profile"
-            class="icon"
-            id="github-icon" />
-        </div>
-      </div>
-    </section>
-
-    <section class="hidden" id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section__pic-container">
-          <img
-            src="./assets/about-pic.png"
-            alt="Profile picture"
-            class="about-pic" />
-        </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/checkmark.png"
-                alt="Checkmark icon"
-                class="icon" />
-              <h3>Goals:</h3>
-              <p>Learn more about AI, Backend, and Cloud development</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Brandon Wong</title>
+        <link rel="icon" href="./assets/favicon.png" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="mediaqueries.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
+    </head>
+    <body>
+        <nav id="desktop-nav">
+            <div class="logo">Brandon Wong</div>
+            <div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
             </div>
-            <div class="details-container">
-              <img
-                src="./assets/education.png"
-                alt="Education icon"
-                class="icon" />
-              <h3>Education</h3>
-              <p>Pursuing a Bachelor's Degree<br />in Computer Science ('26)</p>
+        </nav>
+
+        <nav id="hamburger-nav">
+            <div class="logo">Brandon Wong</div>
+            <div class="hamburger-menu">
+                <div class="hamburger-icon" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="menu-links">
+                    <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                    <li>
+                        <a href="#projects" onclick="toggleMenu()">Projects</a>
+                    </li>
+                    <li>
+                        <a href="#contact" onclick="toggleMenu()">Contact</a>
+                    </li>
+                </div>
             </div>
-          </div>
-          <div class="text-container">
-            <p>
-              My name is Brandon and I'm currently a junior at Stony Brook
-              University in New York. My interest in programming was sparked
-              just after highschool, and I am now proficient in several
-              langauges including Java, Python, C, JavaScript, HTML/CSS. I'm
-              currently learning about backend services, such as ExpressJS and
-              SQL.
-              <br />
-              <br />
-              I also enjoy working out, playing video games, and watching anime
-              and movies in my free time.
-            </p>
-          </div>
+        </nav>
+
+        <section class="hidden" id="profile">
+            <div class="section__pic-container">
+                <img
+                    src="./assets/profile-pic.png"
+                    alt="Brandon Wong profile picture" />
+            </div>
+            <div class="section__text">
+                <p class="section__text__p1">Hello, I'm</p>
+                <h1 class="title">Brandon</h1>
+                <p class="section__text__p2">
+                    Student at Stony Brook University
+                </p>
+                <div class="btn-container">
+                    <button class="btn btn-color-2" onclick="openModal()">
+                        Open Resume
+                    </button>
+                    <button
+                        class="btn btn-color-1"
+                        onclick="location.href='./#contact'">
+                        Contact Info
+                    </button>
+                </div>
+                <div id="socials-container">
+                    <img
+                        src="./assets/linkedin.png"
+                        alt="My LinkedIn profile"
+                        class="icon"
+                        id="linkedin-icon" />
+                    <img
+                        src="./assets/github.png"
+                        alt="My GitHub profile"
+                        class="icon"
+                        id="github-icon" />
+                </div>
+            </div>
+        </section>
+
+        <section class="hidden" id="about">
+            <p class="section__text__p1">Get To Know More</p>
+            <h1 class="title">About Me</h1>
+            <div class="section-container">
+                <div class="section__pic-container">
+                    <img
+                        src="./assets/about-pic.png"
+                        alt="Profile picture"
+                        class="about-pic" />
+                </div>
+                <div class="about-details-container">
+                    <div class="about-containers">
+                        <div class="details-container">
+                            <img
+                                src="./assets/checkmark.png"
+                                alt="Checkmark icon"
+                                class="icon" />
+                            <h3>Goals:</h3>
+                            <p>
+                                Learn more about machine learning and cloud
+                                services
+                            </p>
+                        </div>
+                        <div class="details-container">
+                            <img
+                                src="./assets/education.png"
+                                alt="Education icon"
+                                class="icon" />
+                            <h3>Education</h3>
+                            <p>
+                                Pursuing a Bachelor's Degree<br />in Computer
+                                Science ('26)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-container">
+                        <p>
+                            My name is Brandon and I'm currently a junior at
+                            Stony Brook University in New York. My interest in
+                            programming was sparked just after highschool, and I
+                            am now proficient in several langauges including
+                            Java, Python, C, JavaScript, HTML/CSS. I'm currently
+                            learning more about full stack development.
+                            <br />
+                            <br />
+                            I also enjoy working out, playing video games, and
+                            watching anime and movies in my free time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <img
+                src="./assets/arrow.png"
+                alt="Arrow icon"
+                class="icon arrow"
+                onclick="location.href='./#projects'" />
+        </section>
+
+        <section class="hidden" id="projects">
+            <p class="section__text__p1">Browse My Recent</p>
+            <h1 class="title">Projects</h1>
+            <div class="experience-details-container">
+                <div class="about-containers">
+                    <div class="details-container color-container hidden">
+                        <div class="article-container">
+                            <img
+                                src="./assets/project-1.png"
+                                alt="Stock Tracker App"
+                                class="project-img" />
+                        </div>
+                        <h2 class="experience-sub-title project-title">
+                            Stock Tracker App
+                        </h2>
+                        <div class="btn-container">
+                            <button
+                                class="btn btn-color-2 project-btn"
+                                onclick="window.open('https://github.com/brandon0719/stock-tracker')">
+                                Github
+                            </button>
+                            <button
+                                class="btn btn-color-2 project-btn"
+                                onclick="window.open('https://github.com/brandon0719/stock-tracker/tree/main?tab=readme-ov-file#live-demo')">
+                                Live Demo
+                            </button>
+                        </div>
+                        <h4>Technologies Used</h4>
+                        <p>React.js, Node.js, Express.js, MongoDB, Mongoose </p>
+                    </div>
+
+                    <div class="details-container color-container hidden">
+                        <div class="article-container">
+                            <img
+                                src="./assets/project-2.png"
+                                alt="Project Two"
+                                class="project-img" />
+                        </div>
+                        <h2 class="experience-sub-title project-title">
+                            JWT Auth Todo App
+                        </h2>
+                        <div class="btn-container">
+                            <button
+                                class="btn btn-color-2 project-btn"
+                                onclick="window.open('https://github.com/brandon0719/auth-todo-app')">
+                                Github
+                            </button>
+                            <button
+                                class="btn btn-color-2 project-btn"
+                                onclick="window.open('https://github.com/brandon0719/auth-todo-app/tree/main?tab=readme-ov-file#demo')">
+                                Live Demo
+                            </button>
+                        </div>
+                        <h4>Technologies Used</h4>
+                        <p>React.js, Node.js, Express.js, PostgreSQL, JWT, Bootstrap</p>
+                    </div>
+
+                    <div class="details-container color-container hidden">
+                        <div class="article-container">
+                            <img
+                                src="./assets/project-3.avif"
+                                alt="Project Three"
+                                class="project-img" />
+                        </div>
+                        <h2 class="experience-sub-title project-title">
+                            Weather App
+                        </h2>
+                        <div class="btn-container">
+                            <button
+                                class="btn btn-color-2 project-btn"
+                                onclick="window.open('https://github.com/brandon0719/Weather-App')">
+                                Github
+                            </button>
+                        </div>
+                        <h4>Technologies Used</h4>
+                        <p>HTML/CSS, Javascript, RESTful API</p>
+                    </div>
+                </div>
+            </div>
+            <img
+                src="./assets/arrow.png"
+                alt="Arrow icon"
+                class="icon arrow"
+                onclick="location.href='./#contact'" />
+        </section>
+
+        <section class="hidden" id="contact">
+            <p class="section__text__p1">Get in Touch</p>
+            <h1 class="title">Contact Me</h1>
+            <div class="contact-info-upper-container">
+                <div class="contact-info-container">
+                    <img
+                        src="./assets/email.png"
+                        alt="Email icon"
+                        class="icon contact-icon email-icon" />
+                    <p>
+                        <a href="mailto:brandon.r.wong@stonybrook.edu"
+                            >brandon.r.wong@stonybrook.edu</a
+                        >
+                    </p>
+                </div>
+
+                <div class="contact-info-container">
+                    <img
+                        src="./assets/linkedin.png"
+                        alt="LinkedIn icon"
+                        class="icon contact-icon"
+                        id="linkedin-icon" />
+                    <p>
+                        <a
+                            href="https://www.linkedin.com/in/brandon-wong-191258254/"
+                            target="_blank"
+                            >LinkedIn</a
+                        >
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <nav>
+                <div class="nav-links-container">
+                    <ul class="nav-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <p>Copyright &#169; 2024 Brandon Wong. All Rights Reserved.</p>
+        </footer>
+
+        <!-- The Modal -->
+        <div id="resumeModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <canvas id="pdfCanvas"></canvas>
+            </div>
         </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'" />
-    </section>
-
-    <section class="hidden" id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container hidden">
-            <div class="article-container">
-              <img
-                src="./assets/project-1.png"
-                alt="Stock Tracker App"
-                class="project-img" />
-            </div>
-            <h2 class="experience-sub-title project-title">Stock Tracker App</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('https://github.com/brandon0719/stock-tracker')">
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('https://github.com/brandon0719/stock-tracker/tree/main?tab=readme-ov-file#live-demo')">
-                Live Demo
-              </button>
-            </div>
-          </div>
-<!-- 
-          <div class="details-container color-container hidden">
-            <div class="article-container">
-              <img
-                src="./assets/project-2.png"
-                alt="Project Two"
-                class="project-img" />
-            </div>
-            <h2 class="experience-sub-title project-title">Project Two</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('https://github.com')">
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('https://github.com')">
-                Live Demo
-              </button>
-            </div>
-          </div> -->
-
-          <div class="details-container color-container hidden">
-            <div class="article-container">
-              <img
-                src="./assets/project-3.avif"
-                alt="Project Three"
-                class="project-img" />
-            </div>
-            <h2 class="experience-sub-title project-title">Weather App</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('https://github.com/brandon0719/Weather-App')">
-                Github
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'" />
-    </section>
-
-    <section class="hidden" id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon email-icon" />
-          <p>
-            <a href="mailto:brandon.r.wong@stonybrook.edu"
-              >brandon.r.wong@stonybrook.edu</a
-            >
-          </p>
-        </div>
-
-        <div class="contact-info-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn icon"
-            class="icon contact-icon"
-            id="linkedin-icon" />
-          <p>
-            <a
-              href="https://www.linkedin.com/in/brandon-wong-191258254/"
-              target="_blank"
-              >LinkedIn</a
-            >
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
-      <p>Copyright &#169; 2024 Brandon Wong. All Rights Reserved.</p>
-    </footer>
-
-    <!-- The Modal -->
-    <div id="resumeModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <canvas id="pdfCanvas"></canvas>
-      </div>
-    </div>
-    <script src="script.js"></script>
-  </body>
+        <script src="script.js"></script>
+    </body>
 </html>

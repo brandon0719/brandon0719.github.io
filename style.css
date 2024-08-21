@@ -363,6 +363,10 @@ section {
   border-color: rgb(163, 163, 163);
 }
 
+h4 {
+  padding: 15px;
+}
+
 /* Contact Section */
 #contact {
   display: flex;
