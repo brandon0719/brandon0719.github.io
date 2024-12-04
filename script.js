@@ -14,6 +14,15 @@ document.getElementById('github-icon').addEventListener('click', function() {
     window.open('https://www.github.com/brandon0719', '_blank');
 });
 
+// Experience link
+document.getElementById('webgen-github').addEventListener('click', function() {
+    window.open("https://github.com/ylu8888/GenomeGenesis/tree/master", '_blank');
+})
+document.getElementById("webgen-link").addEventListener("click", function () {
+    window.open("https://genomegenesis.netlify.app/", "_blank");
+});
+
+
 /**
  * Resume modal functions
  */
