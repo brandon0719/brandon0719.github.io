@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export",
+    "deploy": "npm run build && npm run export"
   },
   "dependencies": {
     "@react-email/components": "^0.0.7",
@@ -14,6 +16,7 @@
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "@vercel/analytics": "^1.5.0",
     "autoprefixer": "10.4.14",
     "clsx": "^1.2.1",
     "eslint": "8.43.0",
