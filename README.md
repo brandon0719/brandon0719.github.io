@@ -1,2 +1,1 @@
-# Personal Website
-## https://brandon0719.me
+# [Website Link](brandon0719.me)
