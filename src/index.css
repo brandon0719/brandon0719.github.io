@@ -1,0 +1,513 @@
+/* Registered as colors so the browser can animate between them */
+@property --accent-1 { syntax: "<color>"; inherits: true; initial-value: #c6ff3d; }
+@property --accent-2 { syntax: "<color>"; inherits: true; initial-value: #5b9dff; }
+@property --accent-3 { syntax: "<color>"; inherits: true; initial-value: #ff7ac6; }
+
+/* The page uses three accents, which walk around the six-color wheel two steps apart so
+   they never match. Each holds, then moves to the next hue, which blends cleanly. */
+@keyframes accent-cycle {
+  0%, 11.11%, 100% { --accent-1: var(--lime); --accent-2: var(--blue); --accent-3: var(--pink); }
+  16.67%, 27.78% { --accent-1: var(--teal); --accent-2: var(--violet); --accent-3: var(--orange); }
+  33.33%, 44.44% { --accent-1: var(--blue); --accent-2: var(--pink); --accent-3: var(--lime); }
+  50%, 61.11% { --accent-1: var(--violet); --accent-2: var(--orange); --accent-3: var(--teal); }
+  66.67%, 77.78% { --accent-1: var(--pink); --accent-2: var(--lime); --accent-3: var(--blue); }
+  83.33%, 94.44% { --accent-1: var(--orange); --accent-2: var(--teal); --accent-3: var(--violet); }
+}
+
+:root {
+  animation: accent-cycle 18s linear infinite;
+  --bg: #0b0b0c;
+  --fg: #f4f4ef;
+  --muted: #8d8d86;
+  --line: #2a2a2c;
+  --lime: #c6ff3d;
+  --teal: #4fe3d1;
+  --blue: #5b9dff;
+  --violet: #b18cff;
+  --pink: #ff7ac6;
+  --orange: #ff9f5a;
+  --accent-1: var(--lime);
+  --accent-2: var(--blue);
+  --accent-3: var(--pink);
+  --accent: var(--accent-1);
+  --gutter: clamp(16px, 3vw, 48px);
+  --sans: Archivo, "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  /* The fine grain hides the color bands a dim gradient shows on dark screens */
+  --page-bg:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E"),
+    radial-gradient(60vmax 50vmax at 85% 0%, rgb(91 157 255 / .13), transparent 70%),
+    radial-gradient(55vmax 50vmax at 5% 100%, rgb(177 140 255 / .11), transparent 70%),
+    var(--bg);
+}
+
+* { box-sizing: border-box; margin: 0; }
+html { background: var(--bg); scroll-behavior: smooth; }
+/* A fixed layer rather than a fixed background, which iOS Safari ignores */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--page-bg);
+}
+body {
+  color: var(--fg);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+ol, ul { list-style: none; padding: 0; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* Lists cycle through the three accent colors */
+:is(.rows li, .job, .fact, .activities li):nth-child(3n + 2) { --accent: var(--accent-2); }
+:is(.rows li, .job, .fact, .activities li):nth-child(3n) { --accent: var(--accent-3); }
+
+/* Fades and slides in on scroll, see Reveal.tsx */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s, transform .9s var(--ease), background-size 1.2s var(--ease);
+  transition-delay: calc(var(--n, 0) * 90ms);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* Divider that draws itself across the top once revealed */
+.fact, .job:not(:first-child) {
+  background: linear-gradient(var(--line), var(--line)) 0 0 / 0 1px no-repeat;
+}
+.fact.in, .job.in:not(:first-child) { background-size: 100% 1px; }
+
+/* Thin bar across the top showing how far down the page you are */
+.scroll-progress { display: none; }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 11;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      transform-origin: left;
+      animation: grow-x linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+@keyframes grow-x { from { transform: scaleX(0); } }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.label, .site-header, .scroll-hint, .socials {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .02em;
+}
+.label { color: var(--muted); font-weight: 400; }
+
+/* Underline draws in from the left */
+.u {
+  background: linear-gradient(var(--accent-2), var(--accent-2)) 0 100% / 0 1px no-repeat;
+  padding-bottom: 3px;
+  transition: background-size .45s var(--ease), color .25s, translate .4s var(--ease);
+}
+.u:hover, .u:focus-visible { background-size: 100% 1px; color: var(--accent-2); }
+
+/* Header and scroll hint wait for the name to assemble */
+.site-header, .scroll-hint { animation: fade-in .9s 1.3s both; }
+@keyframes fade-in { from { opacity: 0; } }
+
+.site-header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 24px var(--gutter);
+}
+.site-header nav { display: flex; gap: clamp(14px, 2vw, 28px); }
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+}
+canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+}
+/* Only seen if the canvas is slow to start */
+.hero-name {
+  font-size: clamp(3rem, 11vw, 11rem);
+  font-weight: 900;
+  line-height: .92;
+  text-align: center;
+  text-transform: uppercase;
+  animation: fade-in .3s .6s both;
+}
+.scroll-hint {
+  position: absolute;
+  z-index: 1;
+  bottom: 24px;
+  left: 50%;
+  translate: -50% 0;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  color: var(--muted);
+}
+.scroll-hint::after {
+  content: "";
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(var(--accent-1), var(--accent-2));
+  transform-origin: top;
+  animation: scroll-line 2s var(--ease) infinite;
+}
+@keyframes scroll-line {
+  0% { transform: scaleY(0); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: top; }
+  56% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.about, .experience, .day-off, .contact {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  padding: clamp(96px, 18vh, 200px) var(--gutter);
+}
+:is(.about, .experience, .day-off, .contact) .label { grid-column: 1 / 4; padding-top: .6em; }
+.about-body { grid-column: 4 / 13; }
+.about-lead {
+  font-size: clamp(1.9rem, 4.6vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -.025em;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 32px 24px;
+  margin-top: clamp(48px, 8vh, 88px);
+}
+.fact { padding-top: 14px; }
+.fact dt { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+.fact dd { margin: 10px 0 0; font-size: 1.05rem; font-weight: 500; line-height: 1.35; }
+
+/* Masked word rise, see Rise.tsx */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: .12em;
+  margin-bottom: -.12em;
+}
+.word > span {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform .9s var(--ease);
+  transition-delay: calc(var(--i) * 28ms);
+}
+.in .word > span { transform: none; }
+
+.work { padding-bottom: clamp(64px, 12vh, 140px); }
+.work-stage {
+  position: relative;
+  height: 34vh;
+  min-height: 200px;
+}
+@media (min-width: 700px) {
+  .work-stage { height: 38vh; }
+}
+/* Mouse only: touch has no hover to morph, and iOS Safari ignores fixed backgrounds, which would show a seam */
+@media (min-width: 700px) and (hover: hover) {
+  /* Keeps the morph in view when the list is longer than the screen. Rows slide
+     behind it, so it paints the page gradient, fixed to the viewport to line up. */
+  .work-stage {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--page-bg);
+    background-attachment: fixed;
+  }
+}
+
+.rows { border-top: 1px solid var(--line); }
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1.1fr 1.6fr auto 36px;
+  align-items: baseline;
+  gap: 16px;
+  padding: 26px var(--gutter);
+  border-bottom: 1px solid var(--line);
+  isolation: isolate;
+  overflow: hidden;
+  transition: color .3s, padding-left .55s var(--ease);
+}
+.row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .55s var(--ease);
+}
+.row:focus-visible { outline-offset: -4px; outline-color: var(--fg); }
+.row-num, .row-note, .row-year {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+  transition: color .3s;
+}
+.row-name {
+  font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+.row-arrow {
+  font-size: 1.4rem;
+  justify-self: end;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity .3s, transform .55s var(--ease);
+}
+.row:hover, .row:focus-visible { color: var(--bg); }
+.row:hover::before, .row:focus-visible::before { transform: none; }
+.row:hover :is(.row-num, .row-note, .row-year),
+.row:focus-visible :is(.row-num, .row-note, .row-year) { color: var(--bg); }
+.row:hover .row-arrow, .row:focus-visible .row-arrow { opacity: 1; transform: none; }
+@media (hover: hover) {
+  .row:hover { padding-left: calc(var(--gutter) + 20px); }
+}
+/* Touch browsers keep :hover after a tap, which would leave the row filled on return from the new tab */
+@media (hover: none) {
+  .row:hover:not(:focus-visible) { color: inherit; }
+  .row:hover:not(:focus-visible)::before { transform: scaleX(0); }
+  .row:hover:not(:focus-visible) :is(.row-num, .row-note, .row-year) { color: var(--muted); }
+  .row:hover:not(:focus-visible) .row-arrow { opacity: 0; transform: translateX(-16px); }
+}
+/* Comfortable tap targets for the small text links */
+@media (pointer: coarse) {
+  .u { padding-block: 12px; }
+}
+
+/* "On a day off, you'll find me" with an ending that keeps changing */
+.day-off { padding-block: clamp(64px, 12vh, 140px); }
+.day-off-body {
+  grid-column: 4 / 13;
+  font-size: clamp(1.9rem, 4.6vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -.025em;
+}
+.activities {
+  display: grid;
+  overflow: hidden;
+  padding-bottom: .12em;
+}
+.activities li {
+  grid-area: 1 / 1;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(110%);
+}
+.activities li.on, .activities li.was {
+  transition: transform .8s var(--ease), opacity .5s;
+}
+.activities li.on { opacity: 1; transform: none; }
+.activities li.was { transform: translateY(-110%); }
+
+.experience { padding-block: clamp(64px, 12vh, 140px); }
+.experience .label { padding-top: 40px; }
+
+/* Timeline: a line that fills as you scroll, with a dot per job */
+.jobs { position: relative; grid-column: 4 / 13; padding-left: 20px; }
+.jobs::before, .jobs::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 1px;
+  background: var(--line);
+}
+.jobs::after {
+  width: 2px;
+  background: linear-gradient(var(--accent-1), var(--accent-2), var(--accent-3));
+  transform-origin: top;
+}
+@supports (animation-timeline: view()) {
+  .jobs::after {
+    animation: grow-y linear both;
+    animation-timeline: view();
+    animation-range: cover 15% cover 65%;
+  }
+}
+@keyframes grow-y { from { transform: scaleY(0); } }
+.job {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 8px 24px;
+  padding: 32px 20px;
+}
+.job::after {
+  content: "";
+  position: absolute;
+  top: 44px;
+  left: -24px;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+}
+.job.in::after {
+  background: var(--accent);
+  border-color: var(--accent);
+  animation: ping 1.4s var(--ease) calc(var(--n) * 90ms + .3s);
+}
+@keyframes ping {
+  from { box-shadow: 0 0 0 0 var(--accent); }
+  to { box-shadow: 0 0 0 14px transparent; }
+}
+/* Soft glow that follows the cursor, see spotlight() */
+.job::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(320px circle at var(--x, 50%) var(--y, 50%), color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity .4s;
+}
+.job:hover::before { opacity: 1; }
+.job-company {
+  font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  transition: color .3s, translate .55s var(--ease);
+}
+.job:hover .job-company { color: var(--accent); translate: 10px 0; }
+.job-role { font-weight: 500; }
+.job-dates, .job-location {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+  text-align: right;
+}
+.job-tenure {
+  grid-column: 2;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  text-align: right;
+}
+@media (min-width: 1100px) {
+  /* Wide screens have room to put it beside the job's dot, left of the timeline */
+  .job-tenure {
+    grid-column: auto;
+    position: absolute;
+    top: 40px;
+    right: calc(100% + 40px);
+    white-space: nowrap;
+  }
+}
+.job-note {
+  grid-column: 1 / -1;
+  max-width: 62ch;
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.contact { padding-block: clamp(64px, 12vh, 140px) clamp(96px, 18vh, 200px); }
+.contact-email { grid-column: 4 / 13; }
+.socials {
+  grid-column: 4 / 13;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: clamp(24px, 5vh, 48px);
+}
+.socials .u { display: inline-block; }
+.contact-kind {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+.contact-link {
+  display: inline-block;
+  max-width: 100%;
+  font-size: clamp(1.3rem, 4.4vw, 4rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+}
+.contact-link.u { background-size: 0 2px; }
+.contact-link.u:hover, .contact-link.u:focus-visible { background-size: 100% 2px; }
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+@media (max-width: 699px) {
+  .about, .experience, .day-off, .contact { display: block; }
+  /* Sized to keep the email on one line down to 320px wide */
+  .contact-link { font-size: 5.6vw; }
+  :is(.about, .experience, .day-off, .contact) .label { margin-bottom: 20px; padding-top: 0; }
+  .job { grid-template-columns: 1fr; gap: 4px; padding-inline: 0; }
+  .job-dates, .job-location, .job-tenure { grid-column: 1; text-align: left; }
+  .row { grid-template-columns: 32px 1fr auto; gap: 6px 10px; padding-block: 20px; }
+  .row-note { grid-column: 2 / -1; grid-row: 2; }
+  .row-arrow { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .word > span { transform: none; }
+  .reveal { opacity: 1; transform: none; }
+  .fact, .job:not(:first-child) { background-size: 100% 1px; }
+  .job::after { background: var(--accent); border-color: var(--accent); }
+  .activities { display: block; }
+  .activities li, .activities li.was { opacity: 1; transform: none; }
+}
